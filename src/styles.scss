@@ -1,1 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/tailwind';
+@import './assets/styles/preloader';
+
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+pagination-controls {
+  display: block;
+
+  .ngx-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pagination-next {
+      font-weight: bold;
+
+      a {
+        color: rgb(67 56 202);
+      }
+    }
+
+    .pagination-previous {
+      font-weight: bold;
+
+      a {
+        color: rgb(67 56 202);
+      }
+
+      &.disabled {
+        color: rgba(black, 0.3);
+      }
+    }
+
+    .current {
+      border-radius: 4px;
+      background-color: rgb(67 56 202);
+    }
+
+    a, button {
+      border-radius: 4px;
+    }
+  }
+}
+
+.card {
+  transition: background-color 0.3s;
+  position: relative;
+
+  &:not(:last-of-type)::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 0;
+    border-bottom: 1px solid #E0E7FF;
+  }
+
+  &:has(h2:hover) {
+    background-color: rgba(black, 0.1)
+  }
+}
+
+.text {
+  p {
+    margin: 1rem 0;
+    color: #333333;
+    color: #6366f1;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #6366f1;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  pre {
+    background-color:#a78bfa;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 8px;
+    color: #fff;
+  }
+}
+
+.comment{
+  padding: 20px;
+  box-shadow: 0px 0px 10px 3px currentColor;
+}
