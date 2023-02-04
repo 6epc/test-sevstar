@@ -9,14 +9,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewsSingleComponent } from './components/news-single/news-single.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsListComponent,
     NewsSingleComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    CommentComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,

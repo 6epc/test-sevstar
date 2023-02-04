@@ -1,0 +1,16 @@
+<div class="mb-6 comment">
+
+  <div class="comment__inner">
+    <div class="font-bold mb-2 flex items-center">{{comment.created_at | date: 'short'}} | {{comment.author}}</div>
+    <div class="text" [innerHTML]="comment.text"></div>
+    <button
+      (click)="showTextarea = !showTextarea"
+      class="text-sm text-white bg-purple-500 rounded-lg px-3 py-1 hover:bg-purple-400 transition-all">
+      Replay
+    </button>
+    <app-comment-form *ngIf="showTextarea"></app-comment-form>
+  </div>
+
+  <app-comment *ngFor="let comment of comment.children" [comment]="comment"></app-comment>
+
+</div>

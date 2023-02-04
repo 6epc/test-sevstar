@@ -4,82 +4,21 @@
       (click)="backToNews()">
       Back to news
     </button>
-    <div class="text-sm">19 points {{post.points}} by {{post.author}}</div>
+    <div class="text-sm"><span>{{post.points}} points</span> | <span>by {{post.author}}</span></div>
   </div>
   <h1 class="text-3xl font-bold text-indigo-700">{{post.title}}</h1>
 
   <div class="text mt-5 text-b" [innerHTML]="post.text"></div>
 
-  <form [formGroup]="form" (ngSubmit)="onSendMessage()" class="mb-6">
-    <textarea placehodler="some text" formControlName="textarea" id="message" rows="4" class="
-        placeholder:text-slate-400
-          outline-none
-          block
-          p-2.5
-          w-full
-          text-sm
-          text-indigo-600
-          bg-gray-50
-          rounded-lg
-          border
-          border-gray-300
-          transition-all
-          focus:border-gray-900">
-      </textarea>
+  <app-comment-form></app-comment-form>
 
-    <button [disabled]="form.invalid" type="submit"
-      class="mt-2 text-white bg-purple-500 rounded-lg px-8 py-4 mb-4 w-full hover:bg-purple-400 transition-all disabled:opacity-40">
-      Add comment
-    </button>
-  </form>
-
-  <h2 class="text-2xl font-bold text-indigo-700 mb-4">Comments</h2>
+  <h2 class="text-2xl font-bold text-indigo-700 mb-4 mt-6">Comments</h2>
   <div class="comments">
-    <!-- first lvl comment -->
-    <div
-      *ngFor="let comment of post.children! | paginate: {
-          itemsPerPage: commentsPerPage,
-          currentPage: page,
-          totalItems: allAvailableComments
-        }"
-      class="mb-6 border-b-2 border-indigo-200 comment">
-
-      <div class="font-bold mb-2 flex items-center">{{comment.created_at | date: 'short'}} | {{comment.author}}</div>
-      <div class="text" [innerHTML]="comment.text"></div>
-      <button
-        class="text-sm text-white bg-purple-500 rounded-lg px-3 py-1 hover:bg-purple-400 transition-all"
-        (click)="backToNews()">
-        Replay
-      </button>
-
-      <!-- replay on comment | 2nd lvl comment -->
-      <div
-        class="text innerComment ml-10 mt-6 pt-4 pl-2 border-t-2 border-indigo-200"
-        *ngFor="let childComment of comment.children">
-        <div class="font-bold mb-2">{{childComment.created_at | date: 'short'}} | {{childComment.author}}</div>
-        <div class="text" [innerHTML]="childComment.text"></div>
-        <button
-          class="text-sm text-white bg-purple-500 rounded-lg px-3 py-1 hover:bg-purple-400 transition-all"
-          (click)="backToNews()">
-          Replay
-        </button>
-
-        <!-- 3d lvl comments -->
-        <div
-          class="text innerComment ml-10 mt-6 pt-4 pl-2 border-t-2 border-indigo-200"
-          *ngFor="let childComment of childComment.children">
-          <div class="font-bold mb-2">{{childComment.created_at | date: 'short'}} | {{childComment.author}}</div>
-          <div class="text" [innerHTML]="childComment.text"></div>
-          <button
-            class="text-sm text-white bg-purple-500 rounded-lg px-3 py-1 hover:bg-purple-400 transition-all"
-            (click)="backToNews()">
-            Replay
-          </button>
-        </div>
-      </div>
-    </div>
+    <app-comment *ngFor="let comment of post.children! | paginate: {
+      itemsPerPage: commentsPerPage,
+      currentPage: page,
+      totalItems: allAvailableComments
+    }" [comment]="comment"></app-comment>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="mt-4"></pagination-controls>
   </div>
-
-  <pagination-controls (pageChange)="pageChangeEvent($event)" class="mt-4"></pagination-controls>
-
 </div>

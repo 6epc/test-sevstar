@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 
@@ -12,11 +11,9 @@ import { IPost, NewsService } from 'src/app/services/news.service';
 })
 export class NewsSingleComponent implements OnInit, OnDestroy {
   post!: IPost;
-  form!: FormGroup;
   commentsPerPage: number = 3;
   page: number = 1;
   allAvailableComments: number = 0;
-  comments: any;
   sub!: Subscription;
   resolverSub!:Subscription;
 
@@ -30,15 +27,6 @@ export class NewsSingleComponent implements OnInit, OnDestroy {
     this.resolverSub = this.activatedRoute.data.subscribe(data => {
       this.post = data['single'];
     });
-
-    this.form = new FormGroup({
-      textarea: new FormControl('', [Validators.required])
-    })
-  }
-
-  onSendMessage() {
-    console.log(this.form.value);
-    this.form.reset();
   }
 
   getPost() {

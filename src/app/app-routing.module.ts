@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewsSingleComponent } from './components/news-single/news-single.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { SingleResolver } from './services/single.resolver';
 
 const routes: Routes = [

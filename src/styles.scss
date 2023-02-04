@@ -98,4 +98,22 @@ pagination-controls {
 .comment{
   padding: 20px;
   box-shadow: 0px 0px 10px 3px currentColor;
+
+  .comment {
+    border: none;
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+}
+
+app-comment {
+  display: block;
+
+  app-comment {
+    margin-top: 20px;
+    border-top: 2px solid currentColor;
+  }
 }

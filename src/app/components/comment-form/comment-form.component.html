@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="onSendMessage()" class="mt-5">
+  <textarea
+    placeholder="Enjoy your comment"
+    formControlName="textarea"
+    id="message"
+    rows="4"
+    class="
+    placeholder:text-slate-400
+      outline-none
+      block
+      p-2.5
+      w-full
+      text-sm
+    text-indigo-600
+      bg-gray-50
+      rounded-lg
+      border
+      border-gray-300
+      transition-all
+      focus:border-gray-900">
+  </textarea>
+
+  <button [disabled]="form.invalid" type="submit"
+    class="mt-2 text-white bg-purple-500 rounded-lg px-8 py-4 w-full hover:bg-purple-400 transition-all disabled:opacity-40">
+    Add comment
+  </button>
+</form>
