@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
@@ -12,6 +12,7 @@ import { NewsSingleComponent } from './components/news-single/news-single.compon
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,9 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
 
   ],
   providers: [],

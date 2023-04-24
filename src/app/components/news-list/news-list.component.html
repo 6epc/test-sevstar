@@ -1,23 +1,19 @@
 <div class="container mx-auto">
-  <ng-container *ngIf="news; else loading">
-    <h1 class="text-3xl font-bold text-center mb-4 text-indigo-700">
-      News
-    </h1>
-    <div class="rounded-lg bg-white">
+  <h1 class="text-3xl font-bold text-center mb-4 text-indigo-700">
+    News
+  </h1>
+
+  <div class="rounded-lg bg-white news-list-wrap">
+    <ng-container *ngIf="!isLoading">
       <div
         class="flex w-full items-start p-5 card"
-        *ngFor="let item of news | paginate: {
-          itemsPerPage: hitsPerPage,
-          currentPage: page,
-          totalItems: allAvailableNewsNumber
-        }; let idx = index">
+        *ngFor="let item of news ; let idx = index">
         <div class="font-bold text-lg mr-2">{{ absoluteIndex(idx) }}.</div>
         <div class="grow">
           <h2 class="text-2xl font-bold mb2 text-indigo-700">
             <a (click)="navigation(item.url!, item.objectID)" class="cursor-pointer">{{ item.title }}</a>
             <span class="text-sm ml-2 font-normal align-middle">{{getDomain(item.url!) }}</span>
           </h2>
-
           <div class="text-sm">
             <span>{{item.points}} points </span>
             <span>by {{item.author}}</span>
@@ -25,18 +21,20 @@
           </div>
         </div>
       </div>
-    </div>
-    <pagination-controls (pageChange)="pageChangeEvent($event)" class="mt-4"></pagination-controls>
-
-  </ng-container>
+    </ng-container>
+  </div>
+  <mat-paginator
+    showFirstLastButtons
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSizeOptions]="[5,10,15]">
+  </mat-paginator>
 
   <!-- preloader -->
-  <ng-template #loading>
-    <div class="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </ng-template>
+  <div class="lds-ellipsis" *ngIf="isLoading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </div>

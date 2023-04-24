@@ -1,4 +1,21 @@
 :host {
   display: block;
   padding: 30px 0;
+  height: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .mat-paginator {
+    margin-top: auto;
+  }
+}
+
+.news-list-wrap {
+  overflow-y: auto;
+  background-color: #fff;
+  flex-grow: 1;
 }

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,10 +13,12 @@ import { INews, NewsService } from 'src/app/services/news.service';
 export class NewsListComponent implements OnInit, OnDestroy {
 
   news!: INews[];
-  hitsPerPage: number = 6;
-  page: number = 1;
-  allAvailableNewsNumber: number = 0;
+  page = 0;
   sub!: Subscription;
+
+  length!: number;
+  pageSize = 5;
+  isLoading = false;
 
   constructor(
     private newsService: NewsService,
@@ -27,9 +30,13 @@ export class NewsListComponent implements OnInit, OnDestroy {
   }
 
   getNews() {
-    this.sub = this.newsService.getNews(this.hitsPerPage, this.page).subscribe(data => {
-      this.news = data.availableNewsArrPerPage;
-      this.allAvailableNewsNumber = data.allAvailableNewsNumber;
+    this.isLoading = true;
+    this.sub = this.newsService.getNews(this.pageSize, this.page).subscribe(data => {
+      console.log(data);
+
+      this.news = data.news;
+      this.length = data.length;
+      this.isLoading = false;
     });
   }
 
@@ -37,13 +44,8 @@ export class NewsListComponent implements OnInit, OnDestroy {
     url ? window.open(url, "_blank") : this.router.navigate(['news', id]);
   }
 
-  pageChangeEvent(event: number) {
-    this.page = event;
-    this.getNews();
-  }
-
   absoluteIndex(idx: number): number {
-    return this.hitsPerPage * (this.page - 1) + (idx + 1);
+    return this.pageSize * this.page + (idx + 1);
   }
 
   getDomain(url: string): string | null {
@@ -51,6 +53,13 @@ export class NewsListComponent implements OnInit, OnDestroy {
       return new URL(url).hostname;
     }
     return null
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.page = e.pageIndex;
+    this.getNews();
   }
 
   ngOnDestroy(): void {

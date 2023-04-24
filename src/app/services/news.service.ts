@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 export interface INews {
   created_at: string;
@@ -22,8 +22,8 @@ export interface INews {
 }
 
 export interface IData {
-  allAvailableNewsNumber: number;
-  availableNewsArrPerPage: INews[];
+  length: number;
+  news: INews[];
 }
 
 export interface IPost {
@@ -56,8 +56,8 @@ export class NewsService {
     return this.http.get<IData>(`http://hn.algolia.com/api/v1/search?tags=front_page&page=${page}&hitsPerPage=${newsPerPage}`).pipe(
       map((response: { [key: string]: any }) => {
         return {
-          allAvailableNewsNumber: response['nbHits'],
-          availableNewsArrPerPage: response['hits'],
+          length: response['nbHits'],
+          news: response['hits'],
         }
       })
     );

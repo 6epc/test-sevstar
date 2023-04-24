@@ -13,45 +13,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-pagination-controls {
-  display: block;
-
-  .ngx-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .pagination-next {
-      font-weight: bold;
-
-      a {
-        color: rgb(67 56 202);
-      }
-    }
-
-    .pagination-previous {
-      font-weight: bold;
-
-      a {
-        color: rgb(67 56 202);
-      }
-
-      &.disabled {
-        color: rgba(black, 0.3);
-      }
-    }
-
-    .current {
-      border-radius: 4px;
-      background-color: rgb(67 56 202);
-    }
-
-    a, button {
-      border-radius: 4px;
-    }
-  }
-}
-
 .card {
   transition: background-color 0.3s;
   position: relative;

@@ -14,11 +14,13 @@
 
   <h2 class="text-2xl font-bold text-indigo-700 mb-4 mt-6">Comments</h2>
   <div class="comments">
-    <app-comment *ngFor="let comment of post.children! | paginate: {
-      itemsPerPage: commentsPerPage,
-      currentPage: page,
-      totalItems: allAvailableComments
-    }" [comment]="comment"></app-comment>
-    <pagination-controls (pageChange)="pageChangeEvent($event)" class="mt-4"></pagination-controls>
+    <app-comment *ngFor="let comment of currentCommentsToShow" [comment]="comment"></app-comment>
+
+    <mat-paginator
+      showFirstLastButtons
+      (page)="handlePageEvent($event)"
+      [length]="comments.length"
+      [pageSizeOptions]="[3,6,9]">
+    </mat-paginator>
   </div>
 </div>
